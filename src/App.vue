@@ -1,26 +1,31 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <Turns></Turns>
+  <WinResult></WinResult>
+  <Field></Field>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import {ref} from 'vue'
+import Turns from "@/components/Turns";
+import WinResult from "@/components/WinResult";
+import Field from "@/components/Field";
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  components: {Field, WinResult, Turns},
+  setup() {
+    let isShowDemo = ref(true)
+    return {isShowDemo}
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body {
+  width: 640px;
+  margin: 0 auto;
+}
+h1 {
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
