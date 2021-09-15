@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import {ref} from 'vue'
 import Turns from "@/components/Turns";
 import WinResult from "@/components/WinResult";
 import Field from "@/components/Field";
@@ -13,10 +12,6 @@ import Field from "@/components/Field";
 export default {
   name: 'App',
   components: {Field, WinResult, Turns},
-  setup() {
-    let isShowDemo = ref(true)
-    return {isShowDemo}
-  }
 }
 </script>
 
