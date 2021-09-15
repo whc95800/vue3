@@ -25,7 +25,7 @@ export default {
 
   setup() {
     let arr =[]
-    let drawChips = createdChipsArr()
+    let chipsArr = createdChipsArr()
 
 
     function addData() {
@@ -35,10 +35,10 @@ export default {
           this.arr[i].push("0")
         }
       }
-      console.log(drawChips)
+      console.log(chipsArr)
     }
 
-    return {arr,addData,drawChips}
+    return {arr,addData,chipsArr}
   }
 }
 
