@@ -8,7 +8,6 @@ export default function () {
       return reg.test(obj.className);
     }
 
-
     function drawChip() {
       if (TURN.value % 2 === 0 && !hasClass(this, "white") && !hasClass(this, "black")) {
         this.className += " black";
