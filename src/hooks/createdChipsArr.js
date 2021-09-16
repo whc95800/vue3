@@ -1,5 +1,4 @@
 import {onBeforeUpdate, reactive} from "vue";
-
 export default function (){
   let arr = reactive([])
   let chips = document.getElementsByClassName("chip")
