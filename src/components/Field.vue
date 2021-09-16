@@ -3,7 +3,7 @@
     <table id="field-table">
       <tr v-for="(arr,j) in arr" :key="j">
         <td v-for="(arr,i) in arr" :key="i">
-          <div @click="drawChip" class="chip" v-bind:class="color"></div>
+          <div @click="drawChip()" class="chip" v-bind:class="color"></div>
         </td>
       </tr>
     </table>
@@ -35,19 +35,19 @@ export default {
     }
 
     function drawChip(){
-      if (turn.value % 2 === 0) {
+      if ((turn.value % 2 === 0)&&(this.value !== "1")&&(this.value !== "2")) {
         this.color = "black"
         this.value = "1";
         turn.value++
-      } else if (turn.value % 2 === 1) {
+      } else if (turn.value % 2 === 1&&(this.value !== "1")&&(this.value !== "2")) {
         this.color = "white"
         this.value = "2";
         turn.value++
       }
-
+      console.log(this.value)
     }
 
-    return {arr,addData,turn,drawChip,color}
+    return {arr,addData,turn,color,drawChip}
   }
 }
 
