@@ -42,10 +42,10 @@ export default {
     }
 
     function drawChip(j,i){
-      if ((turn.value % 2 === 0)&(arr[i][j]==="0")) {
+      if ((turn.value % 2 === 0)&&(arr[i][j]==="0")) {
         arr[i][j]="1"
         turn.value++
-      } else if (turn.value % 2 === 1&(arr[i][j]==="0")) {
+      } else if (turn.value % 2 === 1&&(arr[i][j]==="0")) {
         arr[i][j]="2"
         turn.value++
       }
