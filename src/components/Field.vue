@@ -25,10 +25,10 @@ export default {
     let turn = ref(0)
 
     function addData() {
-      for (let i = 0; i < 15; i++) {
+      for (let j = 0; j < 15; j++) {
         this.arr.push([])
-        for (let j = 0; j < 15; j++) {
-          this.arr[i].push("0")
+        for (let i = 0; i < 15; i++) {
+          this.arr[j].push("0")
         }
       }
     }
@@ -50,7 +50,6 @@ export default {
         turn.value++
       }
       console.log(arr)
-      console.log(turn)
     }
 
     return {arr,addData,turn,drawChip,color}
