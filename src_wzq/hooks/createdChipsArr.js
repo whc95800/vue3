@@ -3,9 +3,9 @@ export default function (){
   let arr = reactive([])
   let chips = document.getElementsByClassName("chip")
 
-    onBeforeUpdate(()=>{
-      for (let i=0;i<chips.length;i++){
-        if(i>=224){
+  onBeforeUpdate(()=>{
+    for (let i=0;i<chips.length;i++){
+      if(i>=224){
           arr[224]=chips[224].innerHTML;
           arr[225]=chips[226].innerHTML;
           arr[226]=chips[228].innerHTML;

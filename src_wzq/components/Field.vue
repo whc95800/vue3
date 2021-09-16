@@ -3,7 +3,10 @@
     <table id="field-table">
       <tr v-for="(arr,j) in arr" :key="j">
         <td v-for="(arr,i) in arr" :key="i">
-          <div @click="drawChip" class="chip" v-bind:class="color"></div>
+          <div @click="draw" class="chip" innerHTML=0></div>
+          <div @click="draw" v-if="i===14" class="chip last-in-row" innerHTML=0></div>
+          <div @click="draw" v-if="j===14" class="chip last-in-column" innerHTML=0></div>
+          <div @click="draw" v-if="(i===14)&&(j===14)" class="chip last-in-row last-in-column" innerHTML=0></div>
         </td>
       </tr>
     </table>
@@ -11,7 +14,8 @@
 </template>
 
 <script>
-import {ref} from "vue";
+
+import drawChips from "@/hooks/drawChips";
 
 export default {
   name: "Field",
@@ -22,8 +26,7 @@ export default {
 
   setup() {
     let arr =[]
-    let turn = ref(0)
-    let color = ref(" ")
+    let draw =drawChips()
 
     function addData() {
       for (let i = 0; i < 15; i++) {
@@ -34,20 +37,7 @@ export default {
       }
     }
 
-    function drawChip(){
-      if (turn.value % 2 === 0) {
-        this.color = "black"
-        this.value = "1";
-        turn.value++
-      } else if (turn.value % 2 === 1) {
-        this.color = "white"
-        this.value = "2";
-        turn.value++
-      }
-
-    }
-
-    return {arr,addData,turn,drawChip,color}
+    return {arr,addData,draw}
   }
 }
 
@@ -81,9 +71,20 @@ export default {
   height: 34px;
   width: 34px;
   position: absolute;
-  left: 0.5px;
-  top: 0.5px;
+  left: -18px;
+  top: -18px;
   transition: background-color 0.2s ease;
+  font-size: 0;
+}
+
+.chip.last-in-row {
+  right: -18px;
+  left: inherit;
+}
+
+.chip.last-in-column {
+  bottom: -18px;
+  top: inherit;
 }
 
 .chip:hover {
