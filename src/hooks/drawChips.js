@@ -1,12 +1,14 @@
 import {onMounted, ref} from "vue";
 
 export default function () {
-  onMounted(()=> {
+
     let TURN = ref(0)
+  onMounted(()=> {
     function hasClass(obj, cn) {
       let reg = new RegExp("\\b" + cn + "\\b");
       return reg.test(obj.className);
     }
+
 
     function drawChip() {
       if (TURN.value % 2 === 0 && !hasClass(this, "white") && !hasClass(this, "black")) {
