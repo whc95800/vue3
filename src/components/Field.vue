@@ -1,8 +1,8 @@
 <template>
   <div class="field">
     <table id="field-table">
-      <tr v-for="(arr,j) in arr" :key="j">
-        <td v-for="(arr,i) in arr" :key="i">
+      <tr v-for="j in arr" :key="j">
+        <td v-for="i in arr" :key="i">
           <div @click="drawChip()" class="chip" v-bind:class="color"></div>
         </td>
       </tr>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import {ref} from "vue";
+import {reactive, ref} from "vue";
 
 export default {
   name: "Field",
@@ -21,7 +21,7 @@ export default {
   },
 
   setup() {
-    let arr =[]
+    let arr =reactive([])
     let turn = ref(0)
     let color = ref(" ")
 
@@ -35,16 +35,14 @@ export default {
     }
 
     function drawChip(){
-      if ((turn.value % 2 === 0)&&(this.value !== "1")&&(this.value !== "2")) {
+      if (turn.value % 2 === 0) {
         this.color = "black"
-        this.value = "1";
         turn.value++
-      } else if (turn.value % 2 === 1&&(this.value !== "1")&&(this.value !== "2")) {
+      } else if (turn.value % 2 === 1) {
         this.color = "white"
-        this.value = "2";
         turn.value++
       }
-      console.log(this.value)
+      console.log(arr)
     }
 
     return {arr,addData,turn,color,drawChip}
