@@ -3,10 +3,10 @@
     <table id="field-table">
       <tr v-for="(arr,j) in arr" :key="j">
         <td v-for="(arr,i) in arr" :key="i">
-          <div class="chip" innerHTML=0></div>
-          <div v-if="i==14" class="chip last-in-row" innerHTML=0></div>
-          <div v-if="j==14" class="chip last-in-column" innerHTML=0></div>
-          <div v-if="(i==14)&&(j==14)" class="chip last-in-row last-in-column" innerHTML=0></div>
+          <div @click="draw" class="chip" innerHTML=0></div>
+          <div @click="draw" v-if="i===14" class="chip last-in-row" innerHTML=0></div>
+          <div @click="draw" v-if="j===14" class="chip last-in-column" innerHTML=0></div>
+          <div @click="draw" v-if="(i===14)&&(j===14)" class="chip last-in-row last-in-column" innerHTML=0></div>
         </td>
       </tr>
     </table>
@@ -14,7 +14,8 @@
 </template>
 
 <script>
-import createdChipsArr from "@/hooks/createdChipsArr";
+
+import drawChips from "@/hooks/drawChips";
 
 export default {
   name: "Field",
@@ -25,8 +26,7 @@ export default {
 
   setup() {
     let arr =[]
-    let chipsArr = createdChipsArr()
-
+    let draw =drawChips()
 
     function addData() {
       for (let i = 0; i < 15; i++) {
@@ -35,10 +35,9 @@ export default {
           this.arr[i].push("0")
         }
       }
-      console.log(chipsArr)
     }
 
-    return {arr,addData,chipsArr}
+    return {arr,addData,draw}
   }
 }
 

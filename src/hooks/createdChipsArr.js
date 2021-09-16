@@ -1,10 +1,10 @@
-import {onMounted, reactive} from "vue";
+import {onBeforeUpdate, reactive} from "vue";
 
 export default function (){
   let arr = reactive([])
   let chips = document.getElementsByClassName("chip")
 
-    onMounted(()=>{
+    onBeforeUpdate(()=>{
       for (let i=0;i<chips.length;i++){
         if(i>=224){
           arr[224]=chips[224].innerHTML;
