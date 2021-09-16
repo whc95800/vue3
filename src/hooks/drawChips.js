@@ -1,8 +1,7 @@
 import {onMounted, ref} from "vue";
 
 export default function () {
-
-    let TURN = ref(0)
+  let TURN = ref(0)
   onMounted(()=> {
     function hasClass(obj, cn) {
       let reg = new RegExp("\\b" + cn + "\\b");
