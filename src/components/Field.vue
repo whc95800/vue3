@@ -1,8 +1,8 @@
 <template>
   <div class="field">
     <table id="field-table">
-      <tr v-for="j in arr" :key="j">
-        <td v-for="i in arr" :key="i">
+      <tr v-for="(arr,j) in arr" :key="j">
+        <td v-for="(arr,i) in arr" :key="i">
           <div @click="drawChip()" class="chip" v-bind:class="color"></div>
         </td>
       </tr>
