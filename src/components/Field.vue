@@ -3,7 +3,7 @@
     <table id="field-table">
       <tr v-for="(item,j) in arr" :key="j">
         <td v-for="(item,i) in arr" :key="i">
-          <div @click="drawChip(i,j)" class="chip" v-bind:class="color"></div>
+          <div @click="drawChip(i,j)" class="chip" v-bind:class="color(i,j)"></div>
         </td>
       </tr>
     </table>
@@ -23,7 +23,6 @@ export default {
   setup() {
     let arr =reactive([])
     let turn = ref(0)
-    let color = ref(" ")
 
     function addData() {
       for (let i = 0; i < 15; i++) {
@@ -34,18 +33,27 @@ export default {
       }
     }
 
+    function color (j,i){
+      if(arr[i][j]==="1"){
+        return "black"
+      }else if(arr[i][j]==="2"){
+        return "white"
+      }
+    }
+
     function drawChip(j,i){
-      if (turn.value % 2 === 0) {
+      if ((turn.value % 2 === 0)&(arr[i][j]==="0")) {
         arr[i][j]="1"
         turn.value++
-      } else if (turn.value % 2 === 1) {
+      } else if (turn.value % 2 === 1&(arr[i][j]==="0")) {
         arr[i][j]="2"
         turn.value++
       }
       console.log(arr)
+      console.log(turn)
     }
 
-    return {arr,addData,turn,color,drawChip}
+    return {arr,addData,turn,drawChip,color}
   }
 }
 
