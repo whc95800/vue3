@@ -34,12 +34,12 @@ export default {
       }
     }
 
-    function drawChip(){
+    function drawChip(j,i){
       if (turn.value % 2 === 0) {
-        this.color = "black"
+        arr[i][j]="1"
         turn.value++
       } else if (turn.value % 2 === 1) {
-        this.color = "white"
+        arr[i][j]="2"
         turn.value++
       }
       console.log(arr)
