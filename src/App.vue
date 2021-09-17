@@ -1,28 +1,27 @@
 <template>
+  <h2></h2>
   <Turns></Turns>
   <WinResult></WinResult>
-  <Field @sendTurn="getTurn($event)"></Field>
+  <Field @send="getTurn"></Field>
 </template>
 
 <script>
 import Turns from "@/components/Turns";
 import WinResult from "@/components/WinResult";
 import Field from "@/components/Field";
+import {ref} from "vue";
 
 export default {
   name: 'App',
   components: {Field, WinResult, Turns},
   setup(){
-    let turns = 0
+    let turn = ref(0)
 
-    function getTurn(data){
-      turns=data
-      console.log(data)
+    function getTurn (data) {
+      turn.value = data
     }
 
-    console.log(data)
-
-    return{turns,getTurn}
+    return{turn,getTurn}
   }
 }
 </script>

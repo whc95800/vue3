@@ -3,7 +3,7 @@
     <table id="field-table">
       <tr v-for="(item,j) in arr" :key="j">
         <td v-for="(item,i) in arr" :key="i">
-          <div @click="drawChip(j,i),send" class="chip" v-bind:class="color(j,i)"></div>
+          <div @click="drawChip(j,i);sendTurn" class="chip" v-bind:class="color(j,i)"></div>
         </td>
       </tr>
     </table>
@@ -18,12 +18,12 @@ export default {
   created() {
     this.addData();
   },
-  setup() {
+  setup(props,context) {
     let arr =reactive([])
     let turn = ref(0)
 
-    function send (){
-      this.$emit('sendTurn',turn.value)
+    function sendTurn (){
+      context.emit('send',turn.value)
     }
 
     function addData() {
@@ -53,7 +53,7 @@ export default {
       }
     }
 
-    return {arr,addData,turn,drawChip,color,send}
+    return {arr,addData,turn,drawChip,color,sendTurn}
   }
 }
 
