@@ -1,7 +1,7 @@
 <template>
   <Turns></Turns>
   <WinResult></WinResult>
-  <Field></Field>
+  <Field @sendTurn="getTurn($event)"></Field>
 </template>
 
 <script>
@@ -12,6 +12,18 @@ import Field from "@/components/Field";
 export default {
   name: 'App',
   components: {Field, WinResult, Turns},
+  setup(){
+    let turns = 0
+
+    function getTurn(data){
+      turns=data
+      console.log(data)
+    }
+
+    console.log(data)
+
+    return{turns,getTurn}
+  }
 }
 </script>
 

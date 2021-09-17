@@ -3,7 +3,7 @@
     <table id="field-table">
       <tr v-for="(item,j) in arr" :key="j">
         <td v-for="(item,i) in arr" :key="i">
-          <div @click="drawChip(j,i)" class="chip" v-bind:class="color(j,i)"></div>
+          <div @click="drawChip(j,i),send" class="chip" v-bind:class="color(j,i)"></div>
         </td>
       </tr>
     </table>
@@ -15,14 +15,16 @@ import {reactive, ref} from "vue";
 
 export default {
   name: "Field",
-
   created() {
     this.addData();
   },
-
   setup() {
     let arr =reactive([])
     let turn = ref(0)
+
+    function send (){
+      this.$emit('sendTurn',turn.value)
+    }
 
     function addData() {
       for (let j = 0; j < 15; j++) {
@@ -49,10 +51,9 @@ export default {
         arr[j][i]="2"
         turn.value++
       }
-      console.log(arr)
     }
 
-    return {arr,addData,turn,drawChip,color}
+    return {arr,addData,turn,drawChip,color,send}
   }
 }
 

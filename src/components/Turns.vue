@@ -1,15 +1,37 @@
 <template>
   <div class="turns">
-    <div id="turn-black" class="turn turn-current">Black</div>
-    <div id="turn-white" class="turn">White</div>
+    <div id="turn-black" v-bind:class="changeBlack()">Black</div>
+    <div id="turn-white" v-bind:class="changeWhite()">White</div>
   </div>
 </template>
 
 <script>
-
-
+import {ref} from "vue";
 export default {
   name: "Turns",
+  setup(){
+    let turns = ref(0)
+
+    function changeBlack (){
+      if(turns.value % 2 === 0){
+        return "turn turn-current"
+      }else{
+        return "turn"
+      }
+    }
+
+    function changeWhite (){
+      if(turns.value % 2 === 1){
+        return "turn turn-current"
+      }else{
+        return "turn"
+      }
+    }
+
+    return{changeBlack,changeWhite,turns}
+  }
+
+
 }
 </script>
 
