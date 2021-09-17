@@ -6,11 +6,12 @@
 </template>
 
 <script>
-import {ref} from "vue";
+import {inject} from "vue";
+
 export default {
   name: "Turns",
   setup(){
-    let turns = ref(0)
+    let turns =inject('set')
 
     function changeBlack (){
       if(turns.value % 2 === 0){

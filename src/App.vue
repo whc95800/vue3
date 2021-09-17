@@ -1,6 +1,6 @@
 <template>
   <h2></h2>
-  <Turns></Turns>
+  <Turns :turn="turn"></Turns>
   <WinResult></WinResult>
   <Field @send="getTurn"></Field>
 </template>
@@ -9,13 +9,15 @@
 import Turns from "@/components/Turns";
 import WinResult from "@/components/WinResult";
 import Field from "@/components/Field";
-import {ref} from "vue";
+import {ref,provide} from "vue";
 
 export default {
   name: 'App',
   components: {Field, WinResult, Turns},
   setup(){
     let turn = ref(0)
+
+    provide('set',turn)
 
     function getTurn (data) {
       turn.value = data
