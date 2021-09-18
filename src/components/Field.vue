@@ -3,7 +3,7 @@
     <table id="field-table">
       <tr v-for="(item,j) in arr" :key="j">
         <td v-for="(item,i) in arr" :key="i">
-          <div @click="drawChip(j,i);sendTurn" class="chip" v-bind:class="color(j,i)"></div>
+          <div @click="drawChip(j,i)" class="chip" v-bind:class="color(j,i)"></div>
         </td>
       </tr>
     </table>
@@ -21,10 +21,7 @@ export default {
   setup(props,context) {
     let arr =reactive([])
     let turn = ref(0)
-
-    function sendTurn (){
-      context.emit('send',turn.value)
-    }
+    let win = ref("false")
 
     function addData() {
       for (let j = 0; j < 15; j++) {
@@ -51,9 +48,48 @@ export default {
         arr[j][i]="2"
         turn.value++
       }
+
+      //横
+      if ((arr[j][i])*(arr[j][i+1])*(arr[j][i+2])*(arr[j][i+3])*(arr[j][i+4])===1||
+          (arr[j][i-1])*(arr[j][i])*(arr[j][i+1])*(arr[j][i+2])*(arr[j][i+3])===1||
+          (arr[j][i-2])*(arr[j][i-1])*(arr[j][i])*(arr[j][i+1])*(arr[j][i+2])===1||
+          (arr[j][i-3])*(arr[j][i-2])*(arr[j][i-1])*(arr[j][i])*(arr[j][i+1])===1||
+          (arr[j][i-4])*(arr[j][i-3])*(arr[j][i-2])*(arr[j][i-1])*(arr[j][i])===1
+      ){
+        win.value="blackWin"
+      }
+
+      if((arr[j][i])*(arr[j][i+1])*(arr[j][i+2])*(arr[j][i+3])*(arr[j][i+4])===32||
+        (arr[j][i-1])*(arr[j][i])*(arr[j][i+1])*(arr[j][i+2])*(arr[j][i+3])===32||
+        (arr[j][i-2])*(arr[j][i-1])*(arr[j][i])*(arr[j][i+1])*(arr[j][i+2])===32||
+        (arr[j][i-3])*(arr[j][i-2])*(arr[j][i-1])*(arr[j][i])*(arr[j][i+1])===32||
+        (arr[j][i-4])*(arr[j][i-3])*(arr[j][i-2])*(arr[j][i-1])*(arr[j][i])===32
+      ){
+        win.value="whiteWin"
+      }
+
+      //竖
+      if ((arr[j][i])*(arr[j+1][i])*(arr[j+2][i])*(arr[j+3][i])*(arr[j+4][i])===1||
+          (arr[j-1][i])*(arr[j][i])*(arr[j+1][i])*(arr[j+2][i])*(arr[j+3][i])===1||
+          (arr[j-2][i])*(arr[j-1][i])*(arr[j][i])*(arr[j+1][i])*(arr[j+2][i])===1||
+          (arr[j-3][i])*(arr[j-2][i])*(arr[j-1][i])*(arr[j][i])*(arr[j+1][i])===1||
+          (arr[j-4][i])*(arr[j-3][i])*(arr[j-2][i])*(arr[j-1][i])*(arr[j][i])===1
+      ){
+        win.value="blackWin"
+      }
+      if((arr[j][i])*(arr[j+1][i])*(arr[j+2][i])*(arr[j+3][i])*(arr[j+4][i])===32||
+          (arr[j-1][i])*(arr[j][i])*(arr[j+1][i])*(arr[j+2][i])*(arr[j+3][i])===32||
+          (arr[j-2][i])*(arr[j-1][i])*(arr[j][i])*(arr[j+1][i])*(arr[j+2][i])===32||
+          (arr[j-3][i])*(arr[j-2][i])*(arr[j-1][i])*(arr[j][i])*(arr[j+1][i])===32||
+          (arr[j-4][i])*(arr[j-3][i])*(arr[j-2][i])*(arr[j-1][i])*(arr[j][i])===32
+      ){
+        win.value="whiteWin"
+      }
+      console.log(j,i)
+      context.emit('send',turn.value)
     }
 
-    return {arr,addData,turn,drawChip,color,sendTurn}
+    return {arr,addData,turn,drawChip,color,win}
   }
 }
 

@@ -9,7 +9,7 @@
 import Turns from "@/components/Turns";
 import WinResult from "@/components/WinResult";
 import Field from "@/components/Field";
-import {ref,provide} from "vue";
+import {ref, provide} from "vue";
 
 export default {
   name: 'App',
@@ -22,6 +22,7 @@ export default {
     function getTurn (data) {
       turn.value = data
     }
+
 
     return{turn,getTurn}
   }
