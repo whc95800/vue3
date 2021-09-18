@@ -40,54 +40,72 @@ export default {
       }
     }
 
-    function drawChip(j,i){
-      if ((turn.value % 2 === 0)&&(arr[j][i]==="0")) {
-        arr[j][i]="1"
+    function drawChip(j,i) {
+      if (win.value !== "false"){
+        return false;
+      }
+
+      if ((turn.value % 2 === 0) && (arr[j][i] === "0")) {
+        arr[j][i] = "1"
         turn.value++
-      } else if (turn.value % 2 === 1&&(arr[j][i]==="0")) {
-        arr[j][i]="2"
+      } else if (turn.value % 2 === 1 && (arr[j][i] === "0")) {
+        arr[j][i] = "2"
         turn.value++
       }
 
-      //横
-      if ((arr[j][i])*(arr[j][i+1])*(arr[j][i+2])*(arr[j][i+3])*(arr[j][i+4])===1||
-          (arr[j][i-1])*(arr[j][i])*(arr[j][i+1])*(arr[j][i+2])*(arr[j][i+3])===1||
-          (arr[j][i-2])*(arr[j][i-1])*(arr[j][i])*(arr[j][i+1])*(arr[j][i+2])===1||
-          (arr[j][i-3])*(arr[j][i-2])*(arr[j][i-1])*(arr[j][i])*(arr[j][i+1])===1||
-          (arr[j][i-4])*(arr[j][i-3])*(arr[j][i-2])*(arr[j][i-1])*(arr[j][i])===1
-      ){
-        win.value="blackWin"
+      //纵向｜
+      for(let y=0;y<=14;y++){
+        for(let x=0;x<=10;x++){
+          let winConditions =(arr[x][y])*(arr[x+1][y])*(arr[x+2][y])*(arr[x+3][y])*(arr[x+4][y]);
+          if(winConditions===1){
+            win.value ="black win!!!"
+          }
+          if(winConditions===32){
+            win.value ="white win!!!"
+          }
+        }
+      }
+      //横向ー
+      for(let x=0;x<=14;x++){
+        for(let y=0;y<=10;y++){
+          let winConditions = (arr[x][y])*(arr[x][y+1])*(arr[x][y+2])*(arr[x][y+3])*(arr[x][y+4]);
+          if(winConditions===1){
+            win.value ="black win!!!"
+          }
+          if(winConditions===32){
+            win.value ="white win!!!"
+          }
+        }
+      }
+      //  右斜/
+      for(let y=4;y<=14;y++) {
+        for (let x = 0; x <=10; x++) {
+          let winConditions = (arr[x][y])*(arr[x+1][y-1])*(arr[x+2][y-2])*(arr[x+3][y-3])*(arr[x+4][y-4]);
+          if(winConditions===1){
+            win.value ="black win!!!"
+          }
+          if(winConditions===32){
+            win.value ="white win!!!"
+          }
+        }
+      }
+      //  左斜\
+      for(let x=10; x>=0; x--) {
+        for (let y=0; y<=10; y++) {
+          let winConditions = (arr[x][y])*(arr[x+1][y+1])*(arr[x+2][y+2])*(arr[x+3][y+3])*(arr[x+4][y+4]);
+          if(winConditions===1){
+            win.value ="black win!!!"
+          }
+          if(winConditions===32){
+            win.value ="white win!!!"
+          }
+        }
       }
 
-      if((arr[j][i])*(arr[j][i+1])*(arr[j][i+2])*(arr[j][i+3])*(arr[j][i+4])===32||
-        (arr[j][i-1])*(arr[j][i])*(arr[j][i+1])*(arr[j][i+2])*(arr[j][i+3])===32||
-        (arr[j][i-2])*(arr[j][i-1])*(arr[j][i])*(arr[j][i+1])*(arr[j][i+2])===32||
-        (arr[j][i-3])*(arr[j][i-2])*(arr[j][i-1])*(arr[j][i])*(arr[j][i+1])===32||
-        (arr[j][i-4])*(arr[j][i-3])*(arr[j][i-2])*(arr[j][i-1])*(arr[j][i])===32
-      ){
-        win.value="whiteWin"
-      }
-
-      //竖
-      if ((arr[j][i])*(arr[j+1][i])*(arr[j+2][i])*(arr[j+3][i])*(arr[j+4][i])===1||
-          (arr[j-1][i])*(arr[j][i])*(arr[j+1][i])*(arr[j+2][i])*(arr[j+3][i])===1||
-          (arr[j-2][i])*(arr[j-1][i])*(arr[j][i])*(arr[j+1][i])*(arr[j+2][i])===1||
-          (arr[j-3][i])*(arr[j-2][i])*(arr[j-1][i])*(arr[j][i])*(arr[j+1][i])===1||
-          (arr[j-4][i])*(arr[j-3][i])*(arr[j-2][i])*(arr[j-1][i])*(arr[j][i])===1
-      ){
-        win.value="blackWin"
-      }
-      if((arr[j][i])*(arr[j+1][i])*(arr[j+2][i])*(arr[j+3][i])*(arr[j+4][i])===32||
-          (arr[j-1][i])*(arr[j][i])*(arr[j+1][i])*(arr[j+2][i])*(arr[j+3][i])===32||
-          (arr[j-2][i])*(arr[j-1][i])*(arr[j][i])*(arr[j+1][i])*(arr[j+2][i])===32||
-          (arr[j-3][i])*(arr[j-2][i])*(arr[j-1][i])*(arr[j][i])*(arr[j+1][i])===32||
-          (arr[j-4][i])*(arr[j-3][i])*(arr[j-2][i])*(arr[j-1][i])*(arr[j][i])===32
-      ){
-        win.value="whiteWin"
-      }
-      console.log(j,i)
-      context.emit('send',turn.value)
+      context.emit('send', [turn.value,win.value])
     }
+
+
 
     return {arr,addData,turn,drawChip,color,win}
   }
